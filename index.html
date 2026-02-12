@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Small-batch, at-home macarons baked to order. Browse flavors, seasonal boxes, and recipes powered by our chatbot." />
+  <title>Your Macaron Business</title>
+
+  <style>
+    :root{
+      --bg:#0f1220;
+      --card:#171b2e;
+      --text:#f2f4ff;
+      --muted:#b8bfdc;
+      --accent:#ff7aa2;
+      --accent2:#7cf0d6;
+      --border:rgba(255,255,255,.10);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1000px 600px at 15% 10%, rgba(255,122,162,.22), transparent 60%),
+        radial-gradient(800px 500px at 90% 15%, rgba(124,240,214,.18), transparent 55%),
+        radial-gradient(900px 700px at 60% 100%, rgba(122,142,255,.12), transparent 55%),
+        var(--bg);
+      line-height:1.5;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:24px}
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(15,18,32,.72);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      max-width:var(--max); margin:0 auto; padding:14px 24px;
+    }
+    .brand{
+      display:flex; gap:10px; align-items:center; text-decoration:none;
+      font-weight:800; letter-spacing:.3px;
+    }
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background: linear-gradient(135deg, var(--accent), #ffa6c2 50%, var(--accent2));
+      box-shadow: var(--shadow);
+      border:1px solid rgba(255,255,255,.15);
+    }
+    .nav-links{display:flex; gap:14px; align-items:center}
+    .nav-links a{
+      text-decoration:none;
+      color:var(--muted);
+      font-weight:600;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
+    }
+    .nav-links a:hover{
+      color:var(--text);
+      border-color:var(--border);
+      background:rgba(255,255,255,.04);
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      font-weight:750;
+      text-decoration:none;
+      box-shadow: 0 10px 20px rgba(0,0,0,.18);
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+      cursor:pointer;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.22)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(255,122,162,.9), rgba(124,240,214,.45));
+      border-color: rgba(255,255,255,.20);
+    }
+    .btn.primary:hover{background: linear-gradient(135deg, rgba(255,122,162,1), rgba(124,240,214,.55))}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color:var(--muted);
+      font-weight:650;
+      font-size:13px;
+    }
+    .grid{
+      display:grid;
+      gap:16px;
+    }
+    .hero{
+      padding:40px 0 10px;
+    }
+    .hero-inner{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    .card{
+      background: rgba(23,27,46,.72);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero-card{padding:26px}
+    h1{
+      margin:12px 0 10px;
+      font-size: clamp(34px, 4.2vw, 52px);
+      line-height:1.05;
+      letter-spacing:-.7px;
+    }
+    .sub{
+      color:var(--muted);
+      font-size: 16px;
+      max-width: 56ch;
+      margin: 0 0 18px;
+    }
+    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+    .kpis{
+      padding:22px;
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
+    }
+    .kpi{
+      padding:14px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+    }
+    .kpi strong{display:block; font-size:16px}
+    .kpi span{color:var(--muted); font-size:13px}
+    .section{padding:32px 0}
+    .section h2{
+      margin:0 0 10px;
+      font-size: 26px;
+      letter-spacing:-.2px;
+    }
+    .section p{margin:0 0 14px; color:var(--muted)}
+    .cols{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap:16px;
+    }
+    .cols.two{grid-template-columns: 1fr 1fr}
+    .tile{
+      padding:18px;
+      border-radius: var(--radius);
+      background: rgba(23,27,46,.72);
+      border:1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .tile h3{margin:0 0 6px; font-size:16px}
+    .tile p{margin:0; color:var(--muted); font-size:14px}
+    .badge{
+      display:inline-flex; align-items:center;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:750;
+      color: rgba(15,18,32,.95);
+      background: linear-gradient(135deg, rgba(255,122,162,1), rgba(124,240,214,.65));
+      border:1px solid rgba(255,255,255,.14);
+    }
+    .menu-grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:16px;
+    }
+    .menu-item{
+      grid-column: span 4;
+      padding:18px;
+      border-radius: var(--radius);
+      border:1px solid var(--border);
+      background: rgba(23,27,46,.72);
+      box-shadow: var(--shadow);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .menu-item .top{
+      display:flex; justify-content:space-between; align-items:flex-start; gap:10px;
+    }
+    .menu-item h3{margin:0; font-size:16px}
+    .menu-item .desc{margin:0; color:var(--muted); font-size:14px}
+    .menu-item ul{margin:0; padding-left:18px; color:var(--muted); font-size:14px}
+    .hr{height:1px; background: var(--border); margin:12px 0}
+    .cta{
+      padding:22px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      background: linear-gradient(135deg, rgba(255,122,162,.18), rgba(124,240,214,.12));
+    }
+    .cta h3{margin:0; font-size:18px}
+    .cta p{margin:0; color:var(--muted)}
+    .form{
+      display:grid;
+      gap:10px;
+      margin-top:8px;
+    }
+    label{font-size:13px; color:var(--muted); font-weight:650}
+    input, textarea, select{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(15,18,32,.55);
+      color:var(--text);
+      outline:none;
+    }
+    input:focus, textarea:focus, select:focus{border-color: rgba(255,122,162,.55)}
+    textarea{min-height: 96px; resize: vertical}
+    .small{font-size:12px; color:var(--muted)}
+    .footer{
+      padding:26px 0 40px;
+      color:var(--muted);
+      border-top:1px solid var(--border);
+      margin-top: 24px;
+    }
+    .footer-inner{
+      display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+      align-items:center;
+    }
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .hero-inner{grid-template-columns: 1fr}
+      .cols{grid-template-columns: 1fr}
+      .cols.two{grid-template-columns: 1fr}
+      .menu-item{grid-column: span 12}
+      .nav-links{display:none}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Top nav -->
+  <header class="nav" role="banner">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="Home">
+        <div class="logo" aria-hidden="true"></div>
+        <span>Your Macaron Business</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#menu">Variety</a>
+        <a href="#order">Ordering</a>
+        <a href="#recipes">Recipes + Chatbot</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <a class="btn primary" href="#order">Order / Inquiry</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main id="top" class="wrap" role="main">
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="card hero-card">
+          <span class="pill">✨ Small-batch • Made to order • At-home bakery</span>
+          <h1>Macarons that look like art<br/>and taste like joy.</h1>
+          <p class="sub">
+            I bake delicate French macarons from my home kitchen—crisp shells, chewy centers, and fillings
+            that rotate with the seasons. Explore my flavor boxes, custom sets, and recipes powered by my chatbot.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#menu">Browse flavor boxes</a>
+            <a class="btn" href="#recipes">Try the recipe chatbot</a>
+            <a class="btn" href="#contact">Contact</a>
+          </div>
+
+          <div class="hr"></div>
+
+          <div class="grid" style="gap:10px">
+            <div class="pill">📍 Pickup/Delivery area: <strong style="color:var(--text)">Your City</strong> (edit me)</div>
+            <div class="pill">🗓️ Lead time: <strong style="color:var(--text)">48–72 hours</strong> (edit me)</div>
+            <div class="pill">🎉 Custom events: <strong style="color:var(--text)">Weddings • Birthdays • Corporate</strong></div>
+          </div>
+        </div>
+
+        <aside class="card kpis" aria-label="Highlights">
+          <div class="kpi">
+            <strong>Signature shells</strong>
+            <span>Classic French method with consistent feet + glossy tops.</span>
+          </div>
+          <div class="kpi">
+            <strong>Seasonal flavor drops</strong>
+            <span>Monthly box themes + limited releases.</span>
+          </div>
+          <div class="kpi">
+            <strong>Recipe library + chatbot</strong>
+            <span>Ask “Swiss vs French vs Italian?” and get tailored steps.</span>
+          </div>
+          <div class="kpi">
+            <strong>Allergen transparency</strong>
+            <span>Clear ingredient notes (almond flour, dairy, eggs).</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section">
+      <h2>About</h2>
+      <p>
+        Hi! I’m <strong style="color:var(--text)">[Your Name]</strong> (edit me), and I started baking macarons at home
+        because I love the mix of science + beauty. I focus on clean flavors, smooth textures, and elegant designs.
+      </p>
+
+      <div class="cols">
+        <div class="tile">
+          <h3>Quality ingredients</h3>
+          <p>Thoughtful sourcing + flavor-forward fillings. No “just sweet” macarons.</p>
+        </div>
+        <div class="tile">
+          <h3>Custom colors & themes</h3>
+          <p>Match your event palette, add initials, or create a seasonal aesthetic.</p>
+        </div>
+        <div class="tile">
+          <h3>Small batch care</h3>
+          <p>Baked to order with consistency checks: shell texture, feet, and fill ratio.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu / Variety -->
+    <section id="menu" class="section">
+      <h2>Product variety</h2>
+      <p>Choose a box, then pick flavors (or let me curate). Edit pricing + details below.</p>
+
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="top">
+            <h3>Classic Assortment</h3>
+            <span class="badge">Most popular</span>
+          </div>
+          <p class="desc">A crowd-pleasing mix of best-sellers.</p>
+          <ul>
+            <li>Vanilla bean</li>
+            <li>Salted caramel</li>
+            <li>Pistachio</li>
+            <li>Raspberry</li>
+          </ul>
+          <div class="hr"></div>
+          <p class="small">Box sizes: 6 / 12 / 24 • Starting at $XX (edit me)</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="top">
+            <h3>Seasonal Drop</h3>
+            <span class="badge">Limited</span>
+          </div>
+          <p class="desc">Rotating flavors inspired by the season.</p>
+          <ul>
+            <li>Example: Strawberry basil</li>
+            <li>Example: Lemon poppy</li>
+            <li>Example: Mocha</li>
+            <li>Example: Coconut</li>
+          </ul>
+          <div class="hr"></div>
+          <p class="small">Available while supplies last • Announced on socials (edit me)</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="top">
+            <h3>Custom Event Set</h3>
+            <span class="badge">By request</span>
+          </div>
+          <p class="desc">Designed for your theme: colors, flavors, and packaging.</p>
+          <ul>
+            <li>Weddings + bridal showers</li>
+            <li>Baby showers</li>
+            <li>Corporate gifting</li>
+            <li>Holiday parties</li>
+          </ul>
+          <div class="hr"></div>
+          <p class="small">Minimum order: XX macarons • Lead time: 1–2 weeks (edit me)</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="top">
+            <h3>DIY Macaron Kit</h3>
+            <span class="badge">Fun</span>
+          </div>
+          <p class="desc">Pre-measured ingredients + steps (great for gifts).</p>
+          <ul>
+            <li>Shell mix components</li>
+            <li>Filling base</li>
+            <li>Template + piping tips</li>
+            <li>Chatbot recipe support</li>
+          </ul>
+          <div class="hr"></div>
+          <p class="small">Optional add-on: live mini-lesson (edit me)</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="top">
+            <h3>Signature Flavors</h3>
+            <span class="badge">Core menu</span>
+          </div>
+          <p class="desc">Pick-your-own from a consistent lineup.</p>
+          <ul>
+            <li>Birthday cake</li>
+            <li>Cookies & cream</li>
+            <li>Matcha white chocolate</li>
+            <li>Dark chocolate ganache</li>
+          </ul>
+          <div class="hr"></div>
+          <p class="small">Ask about dairy-free options (availability varies) (edit me)</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="top">
+            <h3>Packaging & gifting</h3>
+            <span class="badge">Add-ons</span>
+          </div>
+          <p class="desc">Make it gift-ready.</p>
+          <ul>
+            <li>Ribbon + note card</li>
+            <li>Window box upgrade</li>
+            <li>Brand sticker / label</li>
+            <li>Corporate bulk packs</li>
+          </ul>
+          <div class="hr"></div>
+          <p class="small">Local delivery available for $X (edit me)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ordering -->
+    <section id="order" class="section">
+      <h2>Ordering & policies</h2>
+      <p>Here’s how it works. Edit to match your exact process.</p>
+
+      <div class="cols two">
+        <div class="tile">
+          <h3>How to order</h3>
+          <p>
+            1) Submit the inquiry form below<br/>
+            2) I’ll confirm availability + quote<br/>
+            3) Payment secures your spot<br/>
+            4) Pickup/delivery window scheduled
+          </p>
+          <div class="hr"></div>
+          <p class="small">
+            Payment options: Venmo / Zelle / Cash (edit me).<br/>
+            Food note: Produced in a home kitchen (add your local compliance language if needed).
+          </p>
+        </div>
+
+        <div class="tile">
+          <h3>Policies</h3>
+          <p>
+            • Typical lead time: 48–72 hours<br/>
+            • Custom sets: 1–2 weeks<br/>
+            • Storage: refrigerated up to 5 days; best after 24-hour “maturation”<br/>
+            • Allergen note: contains almonds + egg whites; fillings may contain dairy
+          </p>
+          <div class="hr"></div>
+          <p class="small">
+            Cancellation policy: full refund up to X days before pickup (edit me).<br/>
+            No-shows: please message—macarons are perishable.
+          </p>
+        </div>
+      </div>
+
+      <div class="card cta" style="margin-top:16px">
+        <h3>Order / inquiry form</h3>
+        <p>Submissions open your email app (no backend needed). You can swap this for a Google Form later.</p>
+
+        <form id="inquiryForm" class="form">
+          <div class="grid" style="grid-template-columns:1fr 1fr; gap:12px">
+            <div>
+              <label for="name">Name</label>
+              <input id="name" name="name" placeholder="Jane Doe" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="jane@email.com" required />
+            </div>
+          </div>
+
+          <div class="grid" style="grid-template-columns:1fr 1fr; gap:12px">
+            <div>
+              <label for="date">Desired date</label>
+              <input id="date" name="date" type="date" />
+            </div>
+            <div>
+              <label for="box">Box type</label>
+              <select id="box" name="box">
+                <option>Classic Assortment</option>
+                <option>Seasonal Drop</option>
+                <option>Custom Event Set</option>
+                <option>DIY Macaron Kit</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="details">Details</label>
+            <textarea id="details" name="details" placeholder="How many macarons? Flavor preferences? Theme colors? Pickup vs delivery? Allergies?"></textarea>
+          </div>
+
+          <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center">
+            <button class="btn primary" type="submit">Send inquiry</button>
+            <span id="formMsg" class="small" aria-live="polite"></span>
+          </div>
+
+          <p class="small">
+            Tip: Replace the email below with yours in the script:
+            <strong style="color:var(--text)">YOUR_EMAIL@EMAIL.COM</strong>
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Recipes + Chatbot -->
+    <section id="recipes" class="section">
+      <h2>Recipes powered by my chatbot</h2>
+      <p>
+        Want to bake along? Use my recipe chatbot for step-by-step guidance, troubleshooting, and method selection
+        (French vs Swiss vs Italian).
+      </p>
+
+      <div class="cols two">
+        <div class="tile">
+          <h3>Recipe chatbot</h3>
+          <p>Get tailored instructions based on your equipment, humidity, and experience level.</p>
+          <div class="hr"></div>
+
+          <!-- Replace the href with your chatbot share link -->
+          <a class="btn primary" href="https://YOUR-CHATBOT-LINK-HERE.com" target="_blank" rel="noopener noreferrer">
+            Open the chatbot
+          </a>
+
+          <p class="small" style="margin-top:10px">
+            Replace <strong style="color:var(--text)">YOUR-CHATBOT-LINK-HERE</strong> with your existing chatbot URL.
+          </p>
+        </div>
+
+        <div class="tile">
+          <h3>Featured recipes</h3>
+          <p>Link out to your recipe pages (or posts). Swap these placeholders.</p>
+          <div class="hr"></div>
+          <p class="small" style="margin:0">
+            • <a href="https://YOUR-RECIPE-LINK-1.com" target="_blank" rel="noopener noreferrer">Classic vanilla bean macarons</a><br/>
+            • <a href="https://YOUR-RECIPE-LINK-2.com" target="_blank" rel="noopener noreferrer">Pistachio macarons (smooth shells)</a><br/>
+            • <a href="https://YOUR-RECIPE-LINK-3.com" target="_blank" rel="noopener noreferrer">Raspberry jam filling + troubleshooting</a><br/>
+            • <a href="https://YOUR-RECIPE-LINK-4.com" target="_blank" rel="noopener noreferrer">Swiss method (meringue stability)</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" aria-label="FAQ">
+      <h2>FAQ</h2>
+      <p>Quick answers to the questions I get most often.</p>
+
+      <div class="cols">
+        <div class="tile">
+          <h3>How should I store macarons?</h3>
+          <p>Refrigerate in an airtight container. Best texture after 24 hours; enjoy within ~5 days.</p>
+        </div>
+        <div class="tile">
+          <h3>Do you accommodate allergies?</h3>
+          <p>Macarons contain almonds + egg whites. Fillings may contain dairy. Ask about options.</p>
+        </div>
+        <div class="tile">
+          <h3>Can you match a theme or color?</h3>
+          <p>Yes—share your inspo pics and palette. Custom sets need extra lead time.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <p>Questions, collaborations, or custom orders—reach out.</p>
+
+      <div class="cols two">
+        <div class="tile">
+          <h3>Direct</h3>
+          <p class="small" style="margin:0">
+            Email: <a href="mailto:YOUR_EMAIL@EMAIL.COM">YOUR_EMAIL@EMAIL.COM</a><br/>
+            Instagram: <a href="https://instagram.com/YOUR_HANDLE" target="_blank" rel="noopener noreferrer">@YOUR_HANDLE</a><br/>
+            TikTok: <a href="https://tiktok.com/@YOUR_HANDLE" target="_blank" rel="noopener noreferrer">@YOUR_HANDLE</a>
+          </p>
+          <div class="hr"></div>
+          <p class="small">Business hours: X–Y (edit me)</p>
+        </div>
+
+        <div class="tile">
+          <h3>Pickup / Delivery</h3>
+          <p class="small" style="margin:0">
+            Pickup: Neighborhood / landmark (edit me)<br/>
+            Delivery: Radius + fee (edit me)<br/>
+            Food note: Add your local cottage food language if applicable (edit me)
+          </p>
+          <div class="hr"></div>
+          <p class="small">Want a menu PDF? Add a link here later.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+      <div class="wrap footer-inner">
+        <div>
+          <strong style="color:var(--text)">Your Macaron Business</strong><br/>
+          <span class="small">© <span id="year"></span> • Small-batch macarons • Made with care</span>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap">
+          <a class="btn" href="#top">Back to top</a>
+          <a class="btn" href="#recipes">Recipes + Chatbot</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Smooth-ish anchor scroll for older browsers (modern browsers handle CSS scroll-behavior, but we keep it minimal)
+    document.documentElement.style.scrollBehavior = "smooth";
+
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Inquiry form -> opens mail client (no backend needed)
+    const form = document.getElementById("inquiryForm");
+    const msg = document.getElementById("formMsg");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const date = document.getElementById("date").value;
+      const box = document.getElementById("box").value;
+      const details = document.getElementById("details").value.trim();
+
+      if (!name || !email) {
+        msg.textContent = "Please add your name and email.";
+        return;
+      }
+
+      // Replace with your email
+      const to = "YOUR_EMAIL@EMAIL.COM";
+
+      const subject = encodeURIComponent(`Macaron Inquiry — ${name}`);
+      const bodyLines = [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        `Desired date: ${date || "N/A"}`,
+        `Box type: ${box}`,
+        "",
+        "Details:",
+        details || "(none provided)"
+      ];
+      const body = encodeURIComponent(bodyLines.join("\n"));
+
+      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+      msg.textContent = "Opening your email app…";
+    });
+  </script>
+</body>
+</html>
