@@ -1,487 +1,186 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Small-batch, made-to-order macarons in Dallas. Browse flavors, seasonal boxes, and recipes powered by a chatbot." />
-  <title>Agneetta’s Macarons | Dallas</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="description" content="Agneetta’s Macarons | Small-batch macarons in Dallas" />
+<title>Agneetta’s Macarons | Dallas</title>
 
-  <style>
-    :root{
-      --bg:#0f1220;
-      --card:#171b2e;
-      --text:#f2f4ff;
-      --muted:#b8bfdc;
-      --accent:#ff7aa2;
-      --accent2:#7cf0d6;
-      --border:rgba(255,255,255,.10);
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius: 18px;
-      --max: 1100px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      color:var(--text);
-      background:
-        radial-gradient(1000px 600px at 15% 10%, rgba(255,122,162,.22), transparent 60%),
-        radial-gradient(800px 500px at 90% 15%, rgba(124,240,214,.18), transparent 55%),
-        radial-gradient(900px 700px at 60% 100%, rgba(122,142,255,.12), transparent 55%),
-        var(--bg);
-      line-height:1.5;
-    }
-    a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding:24px}
-    .nav{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(10px);
-      background: rgba(15,18,32,.72);
-      border-bottom:1px solid var(--border);
-    }
-    .nav-inner{
-      display:flex; align-items:center; justify-content:space-between;
-      max-width:var(--max); margin:0 auto; padding:14px 24px;
-      gap:14px;
-    }
-    .brand{
-      display:flex; gap:10px; align-items:center; text-decoration:none;
-      font-weight:800; letter-spacing:.3px; white-space:nowrap;
-    }
-    .logo{
-      width:36px; height:36px; border-radius:12px;
-      background: linear-gradient(135deg, var(--accent), #ffa6c2 50%, var(--accent2));
-      box-shadow: var(--shadow);
-      border:1px solid rgba(255,255,255,.15);
-      flex:0 0 auto;
-    }
-    .nav-links{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
-    .nav-links a{
-      text-decoration:none;
-      color:var(--muted);
-      font-weight:650;
-      padding:8px 10px;
-      border-radius:12px;
-      border:1px solid transparent;
-    }
-    .nav-links a:hover{
-      color:var(--text);
-      border-color:var(--border);
-      background:rgba(255,255,255,.04);
-    }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
-      padding:12px 14px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.06);
-      color:var(--text);
-      font-weight:750;
-      text-decoration:none;
-      box-shadow: 0 10px 20px rgba(0,0,0,.18);
-      transition: transform .08s ease, background .2s ease, border-color .2s ease;
-      cursor:pointer;
-      white-space:nowrap;
-    }
-    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.22)}
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(255,122,162,.92), rgba(124,240,214,.45));
-      border-color: rgba(255,255,255,.20);
-    }
-    .btn.primary:hover{background: linear-gradient(135deg, rgba(255,122,162,1), rgba(124,240,214,.55))}
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,.04);
-      color:var(--muted);
-      font-weight:650;
-      font-size:13px;
-    }
-    .grid{display:grid; gap:16px}
-    .hero{padding:40px 0 10px}
-    .hero-inner{
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap:22px;
-      align-items:stretch;
-    }
-    .card{
-      background: rgba(23,27,46,.72);
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-    .hero-card{padding:26px}
-    h1{
-      margin:12px 0 10px;
-      font-size: clamp(34px, 4.2vw, 52px);
-      line-height:1.05;
-      letter-spacing:-.7px;
-    }
-    .sub{
-      color:var(--muted);
-      font-size: 16px;
-      max-width: 56ch;
-      margin: 0 0 18px;
-    }
-    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
-    .kpis{
-      padding:22px;
-      display:grid;
-      grid-template-columns:1fr;
-      gap:12px;
-    }
-    .kpi{
-      padding:14px;
-      border-radius:16px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,.04);
-    }
-    .kpi strong{display:block; font-size:16px}
-    .kpi span{color:var(--muted); font-size:13px}
-    .section{padding:32px 0}
-    .section h2{margin:0 0 10px; font-size: 26px; letter-spacing:-.2px}
-    .section p{margin:0 0 14px; color:var(--muted)}
-    .cols{
-      display:grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap:16px;
-    }
-    .tile{
-      padding:18px;
-      border-radius: var(--radius);
-      background: rgba(23,27,46,.72);
-      border:1px solid var(--border);
-      box-shadow: var(--shadow);
-    }
-    .tile h3{margin:0 0 6px; font-size:16px}
-    .tile p{margin:0; color:var(--muted); font-size:14px}
-    .badge{
-      display:inline-flex; align-items:center;
-      padding:6px 10px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:750;
-      color: rgba(15,18,32,.95);
-      background: linear-gradient(135deg, rgba(255,122,162,1), rgba(124,240,214,.65));
-      border:1px solid rgba(255,255,255,.14);
-    }
-    .menu-grid{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap:16px;
-    }
-    .menu-item{
-      grid-column: span 4;
-      padding:18px;
-      border-radius: var(--radius);
-      border:1px solid var(--border);
-      background: rgba(23,27,46,.72);
-      box-shadow: var(--shadow);
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
-    .menu-item .top{display:flex; justify-content:space-between; align-items:flex-start; gap:10px}
-    .menu-item h3{margin:0; font-size:16px}
-    .menu-item .desc{margin:0; color:var(--muted); font-size:14px}
-    .menu-item ul{margin:0; padding-left:18px; color:var(--muted); font-size:14px}
-    .hr{height:1px; background: var(--border); margin:12px 0}
+<style>
+:root{
+  --bg:#0f1220;
+  --card:#171b2e;
+  --text:#f2f4ff;
+  --muted:#b8bfdc;
+  --accent:#ff7aa2;
+  --accent2:#7cf0d6;
+  --border:rgba(255,255,255,.10);
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+  --radius:18px;
+  --max:1100px;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto;
+  color:var(--text);
+  background:var(--bg);
+}
+a{color:inherit;text-decoration:none}
 
-    /* Small “hero video” area */
-    .video-card{padding:16px}
-    .video-frame{
-      width:100%;
-      aspect-ratio: 16 / 9;
-      border-radius: 16px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(15,18,32,.55);
-      overflow:hidden;
-    }
-    video{width:100%; height:100%; object-fit:cover; display:block}
+.wrap{max-width:var(--max);margin:0 auto;padding:24px}
 
-    .footer{
-      padding:26px 0 40px;
-      color:var(--muted);
-      border-top:1px solid var(--border);
-      margin-top: 24px;
-    }
-    .footer-inner{
-      display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
-      align-items:center;
-    }
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(15,18,32,.85);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{
+  display:flex;justify-content:space-between;align-items:center;
+  max-width:var(--max);margin:0 auto;padding:14px 24px;
+}
+.brand{display:flex;gap:10px;align-items:center;font-weight:800}
+.logo{
+  width:34px;height:34px;border-radius:12px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+}
+.nav-links{display:flex;gap:20px;font-weight:600}
+.nav-links a:hover{color:white}
 
-    @media (max-width: 920px){
-      .hero-inner{grid-template-columns: 1fr}
-      .cols{grid-template-columns: 1fr}
-      .menu-item{grid-column: span 12}
-    }
-    @media (max-width: 760px){
-      .nav-inner{justify-content:space-between}
-      .nav-links{display:none}
-    }
-  </style>
+.btn{
+  padding:10px 16px;
+  border-radius:12px;
+  font-weight:700;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#111;
+}
+
+/* HERO VIDEO */
+.hero-video{
+  width:100%;
+  height:70vh;
+  overflow:hidden;
+}
+.hero-video video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* SECTION STYLING */
+.section{padding:60px 24px}
+.section h1{font-size:42px;margin-bottom:10px}
+.section h2{font-size:28px;margin-bottom:12px}
+.section p{color:var(--muted);max-width:650px}
+
+/* FUN FACT */
+.fun-fact{
+  display:flex;
+  gap:30px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-top:40px;
+}
+.fun-fact img{
+  width:350px;
+  border-radius:20px;
+  box-shadow:var(--shadow);
+}
+.fun-text{
+  max-width:400px;
+  font-size:20px;
+  font-weight:600;
+}
+
+.footer{
+  padding:30px;
+  text-align:center;
+  border-top:1px solid var(--border);
+  color:var(--muted);
+}
+</style>
 </head>
 
 <body>
-  <header class="nav" role="banner">
-    <div class="nav-inner">
-      <a class="brand" href="index.html" aria-label="Home">
-        <div class="logo" aria-hidden="true"></div>
-        <span>Agneetta’s Macarons</span>
-      </a>
 
-      <nav class="nav-links" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="order.html">Order</a>
-        <a href="gallery.html">Gallery</a>
-      </nav>
-
-      <a class="btn primary" href="order.html">Order / Inquiry</a>
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <div class="logo"></div>
+      <span>Agneetta’s Macarons</span>
     </div>
-  </header>
 
-  <main class="wrap" role="main">
-    <section class="hero">
-      <div class="hero-inner">
-        <div class="card hero-card">
-          <span class="pill">✨ Small-batch • Made to order • At-home bakery</span>
-          <h1>Macarons that look like art<br/>and taste like joy.</h1>
-          <p class="sub">
-            I bake delicate macarons in Dallas—crisp shells, chewy centers, and fillings that rotate with the seasons.
-            Explore my flavor boxes, custom sets, and recipes powered by my chatbot.
-          </p>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="order.html">Order</a>
+      <a href="gallery.html">Gallery</a>
+    </div>
+  </div>
+</header>
 
-          <div class="hero-actions">
-            <a class="btn primary" href="#variety">Browse flavor boxes</a>
-            <a class="btn" href="#recipes">Try the recipe chatbot</a>
-            <a class="btn" href="order.html">Order</a>
-          </div>
+<!-- AUTOPLAY HERO VIDEO -->
+<div class="hero-video">
+  <!-- Upload your video as assets/hero.mp4 in GitHub -->
+  <video autoplay muted loop playsinline>
+    <source src="assets/hero.mp4" type="video/mp4">
+  </video>
+</div>
 
-          <div class="hr"></div>
+<div class="wrap">
 
-          <div class="grid" style="gap:10px">
-            <div class="pill">📍 Pickup/Delivery area: <strong style="color:var(--text)">Dallas</strong></div>
-            <div class="pill">🗓️ Lead time: <strong style="color:var(--text)">48–72 hours</strong></div>
-            <div class="pill">🎉 Custom events: <strong style="color:var(--text)">Weddings • Birthdays • Corporate</strong></div>
-          </div>
-        </div>
+  <section class="section">
+    <h1>Macarons that look like art and taste like joy.</h1>
+    <p>
+      Small-batch macarons baked in Dallas. Lead time: 48–72 hours.
+      Signature shells made using the classic Swiss method.
+      Seasonal flavor drops include strawberry shortcake and limited Valentine’s Day specials.
+    </p>
+    <br>
+    <a class="btn" href="order.html">Order Now</a>
+  </section>
 
-        <aside class="grid" style="gap:16px">
-          <!-- Optional: Embedded / hosted 5-second video -->
-          <div class="card video-card">
-            <div class="pill" style="margin-bottom:10px">🎥 5-second homepage video</div>
-            <div class="video-frame">
-              <!-- Replace src with your file path once you add it to the repo (example: /assets/hero.mp4) -->
-              <video src="assets/hero.mp4" autoplay muted loop playsinline></video>
-            </div>
-            <p class="sub" style="margin:10px 0 0; font-size:13px">
-              If you don’t have the video yet, this box will stay blank. Add <strong>assets/hero.mp4</strong> later.
-            </p>
-          </div>
+  <section class="section">
+    <h2>About</h2>
+    <p>
+      Hi, I’m Agneetta. I started baking macarons at home because my grandma and I used to bake together growing up.
+      That tradition became a really meaningful hobby for me, and now I get to share it through small-batch macarons made with care.
+    </p>
+  </section>
 
-          <div class="card kpis" aria-label="Highlights">
-            <div class="kpi">
-              <strong>Signature shells</strong>
-              <span>Classic Swiss method for stable meringue + consistent texture.</span>
-            </div>
-            <div class="kpi">
-              <strong>Seasonal flavor drops</strong>
-              <span>Strawberry shortcake + limited releases (Valentine’s Day specials).</span>
-            </div>
-            <div class="kpi">
-              <strong>Recipe library & chatbot</strong>
-              <span>Ask “Swiss vs French vs Italian?” and get tailored steps.</span>
-            </div>
-            <div class="kpi">
-              <strong>Allergen transparency</strong>
-              <span>Clear ingredient notes (almond flour, dairy, eggs).</span>
-            </div>
-          </div>
-        </aside>
+  <section class="section">
+    <h2>Signature Flavors</h2>
+    <p>
+      Vanilla • Strawberry Shortcake • Raspberry • Lemon • Blueberry • Chocolate
+    </p>
+  </section>
+
+  <!-- FUN FACT SECTION -->
+  <section class="section">
+    <div class="fun-fact">
+      <!-- Upload your image as assets/strawberry.jpg in GitHub -->
+      <img src="assets/strawberry.jpg" alt="Strawberry Macarons">
+      <div class="fun-text">
+        Fun fact: Strawberry macarons are my favorite flavor! <br><br>
+        Click <strong>"Order"</strong> and get yours today 🍓
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="about" class="section">
-      <h2>About</h2>
-      <p>
-        Hi, I’m <strong style="color:var(--text)">Agneetta</strong> — and I started baking macarons at home because my grandma and I
-        used to bake together growing up. That tradition became a really meaningful hobby for me, and now I get to share it
-        through small-batch macarons made with care.
-      </p>
+</div>
 
-      <div class="cols">
-        <div class="tile">
-          <h3>Quality ingredients</h3>
-          <p>Thoughtful sourcing + flavor-forward fillings. No “just sweet” macarons.</p>
-        </div>
-        <div class="tile">
-          <h3>Custom colors & themes</h3>
-          <p>Match your event palette, add initials, or create a seasonal aesthetic.</p>
-        </div>
-        <div class="tile">
-          <h3>Small batch care</h3>
-          <p>Baked to order with consistency checks: texture, feet, and fill ratio.</p>
-        </div>
-      </div>
-    </section>
+<footer class="footer">
+  © <script>document.write(new Date().getFullYear())</script> Agneetta’s Macarons • Dallas • Baked with care
+</footer>
 
-    <section id="variety" class="section">
-      <h2>Product variety</h2>
-      <p>Choose a box, then pick flavors (or let me curate). You can keep pricing as “quote on inquiry.”</p>
+<!-- Chatling chatbot -->
+<script>
+window.chtlConfig = { chatbotId: "2137513927" }
+</script>
+<script async data-id="2137513927" id="chtl-script"
+type="text/javascript"
+src="https://chatling.ai/js/embed.js"></script>
 
-      <div class="menu-grid">
-        <div class="menu-item">
-          <div class="top">
-            <h3>Classic Assortment</h3>
-            <span class="badge">Most popular</span>
-          </div>
-          <p class="desc">A crowd-pleasing mix of best-sellers.</p>
-          <ul>
-            <li>Vanilla bean</li>
-            <li>Salted caramel</li>
-            <li>Pistachio</li>
-            <li>Raspberry</li>
-          </ul>
-          <div class="hr"></div>
-          <p class="desc" style="font-size:13px">Box sizes: 6 / 12 / 24 • Pricing shared on inquiry</p>
-        </div>
-
-        <div class="menu-item">
-          <div class="top">
-            <h3>Seasonal Drop</h3>
-            <span class="badge">Limited</span>
-          </div>
-          <p class="desc">Rotating flavors inspired by the season.</p>
-          <ul>
-            <li>Strawberry shortcake</li>
-            <li>Limited releases (Valentine’s Day specials)</li>
-          </ul>
-          <div class="hr"></div>
-          <p class="desc" style="font-size:13px">Available while supplies last • Announced on socials</p>
-        </div>
-
-        <div class="menu-item">
-          <div class="top">
-            <h3>Custom Event Set</h3>
-            <span class="badge">By request</span>
-          </div>
-          <p class="desc">Designed for your theme: colors, flavors, and packaging.</p>
-          <ul>
-            <li>Weddings + bridal showers</li>
-            <li>Baby showers</li>
-            <li>Corporate gifting</li>
-            <li>Holiday parties</li>
-          </ul>
-          <div class="hr"></div>
-          <p class="desc" style="font-size:13px">Minimum order + lead time vary by event</p>
-        </div>
-
-        <div class="menu-item">
-          <div class="top">
-            <h3>DIY Macaron Kit</h3>
-            <span class="badge">Fun</span>
-          </div>
-          <p class="desc">Pre-measured ingredients + steps (great for gifts).</p>
-          <ul>
-            <li>Shell guidance</li>
-            <li>Filling base ideas</li>
-            <li>Template + piping tips</li>
-            <li>Chatbot recipe support</li>
-          </ul>
-          <div class="hr"></div>
-          <p class="desc" style="font-size:13px">Optional add-on: live mini-lesson</p>
-        </div>
-
-        <div class="menu-item">
-          <div class="top">
-            <h3>Signature Flavors</h3>
-            <span class="badge">Core menu</span>
-          </div>
-          <p class="desc">Pick-your-own from a consistent lineup.</p>
-          <ul>
-            <li>Vanilla</li>
-            <li>Strawberry shortcake</li>
-            <li>Raspberry</li>
-            <li>Lemon</li>
-            <li>Blueberry</li>
-            <li>Chocolate</li>
-          </ul>
-          <div class="hr"></div>
-          <p class="desc" style="font-size:13px">Ask about seasonal extras</p>
-        </div>
-
-        <div class="menu-item">
-          <div class="top">
-            <h3>Packaging & gifting</h3>
-            <span class="badge">Add-ons</span>
-          </div>
-          <p class="desc">Make it gift-ready.</p>
-          <ul>
-            <li>Ribbon + note card</li>
-            <li>Window box upgrade</li>
-            <li>Brand sticker / label</li>
-            <li>Corporate bulk packs</li>
-          </ul>
-          <div class="hr"></div>
-          <p class="desc" style="font-size:13px">Local delivery available (fee varies)</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="recipes" class="section">
-      <h2>Recipes powered by my chatbot</h2>
-      <p>
-        Want to bake along? Use my recipe chatbot for step-by-step guidance and troubleshooting.
-      </p>
-
-      <div class="cols" style="grid-template-columns: 1fr 1fr; gap:16px">
-        <div class="tile">
-          <h3>Recipe chatbot</h3>
-          <p>Click below to open it (or embed it directly—see the instructions I wrote below).</p>
-          <div class="hr"></div>
-          <!-- Replace with your Chatling share link -->
-          <a class="btn primary" href="https://YOUR-CHATLING-SHARE-LINK" target="_blank" rel="noopener noreferrer">
-            Open the chatbot
-          </a>
-          <p class="sub" style="margin:10px 0 0; font-size:13px">
-            Replace <strong style="color:var(--text)">YOUR-CHATLING-SHARE-LINK</strong> with your Chatling link.
-          </p>
-        </div>
-
-        <div class="tile">
-          <h3>Featured recipes</h3>
-          <p>Link to your favorite recipes here.</p>
-          <div class="hr"></div>
-          <p class="sub" style="margin:0; font-size:13px">
-            • <a href="https://YOUR-RECIPE-LINK-1" target="_blank" rel="noopener noreferrer">Classic vanilla macarons</a><br/>
-            • <a href="https://YOUR-RECIPE-LINK-2" target="_blank" rel="noopener noreferrer">Strawberry shortcake filling</a><br/>
-            • <a href="https://YOUR-RECIPE-LINK-3" target="_blank" rel="noopener noreferrer">Lemon curd filling</a><br/>
-            • <a href="https://YOUR-RECIPE-LINK-4" target="_blank" rel="noopener noreferrer">Swiss method troubleshooting</a>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <footer class="footer" role="contentinfo">
-      <div class="wrap footer-inner">
-        <div>
-          <strong style="color:var(--text)">Agneetta’s Macarons</strong><br/>
-          <span style="font-size:12px">© <span id="year"></span> • Dallas • Baked with care</span>
-        </div>
-        <div style="display:flex; gap:10px; flex-wrap:wrap">
-          <a class="btn" href="order.html">Order</a>
-          <a class="btn" href="gallery.html">Gallery</a>
-        </div>
-      </div>
-    </footer>
-  </main>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
+
