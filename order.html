@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Order inquiry for Agneetta’s Macarons in Dallas." />
+  <title>Order | Agneetta’s Macarons</title>
+
+  <style>
+    :root{
+      --bg:#0f1220; --text:#f2f4ff; --muted:#b8bfdc;
+      --accent:#ff7aa2; --accent2:#7cf0d6;
+      --border:rgba(255,255,255,.10); --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px; --max: 900px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1000px 600px at 15% 10%, rgba(255,122,162,.22), transparent 60%),
+        radial-gradient(800px 500px at 90% 15%, rgba(124,240,214,.18), transparent 55%),
+        var(--bg);
+      line-height:1.5;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:24px}
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(15,18,32,.72);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      max-width:1100px; margin:0 auto; padding:14px 24px;
+      gap:14px;
+    }
+    .brand{display:flex; gap:10px; align-items:center; text-decoration:none; font-weight:800}
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background: linear-gradient(135deg, var(--accent), #ffa6c2 50%, var(--accent2));
+      box-shadow: var(--shadow);
+      border:1px solid rgba(255,255,255,.15);
+    }
+    .nav-links{display:flex; gap:10px; align-items:center}
+    .nav-links a{
+      text-decoration:none; color:var(--muted); font-weight:650;
+      padding:8px 10px; border-radius:12px; border:1px solid transparent;
+    }
+    .nav-links a:hover{color:var(--text); border-color:var(--border); background:rgba(255,255,255,.04)}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 14px; border-radius:14px; border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06); color:var(--text);
+      font-weight:750; text-decoration:none; box-shadow: 0 10px 20px rgba(0,0,0,.18);
+      cursor:pointer;
+    }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(255,122,162,.92), rgba(124,240,214,.45));
+      border-color: rgba(255,255,255,.20);
+    }
+    .card{
+      background: rgba(23,27,46,.72);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:22px;
+    }
+    h1{margin:0 0 8px; font-size:34px; letter-spacing:-.4px}
+    p{margin:0 0 12px; color:var(--muted)}
+    .hr{height:1px; background: var(--border); margin:14px 0}
+    label{font-size:13px; color:var(--muted); font-weight:650}
+    input, textarea, select{
+      width:100%; padding:12px 12px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(15,18,32,.55);
+      color:var(--text); outline:none;
+    }
+    textarea{min-height: 110px; resize: vertical}
+    .grid{display:grid; gap:12px}
+    .two{grid-template-columns:1fr 1fr}
+    .small{font-size:12px; color:var(--muted)}
+    @media (max-width: 720px){ .two{grid-template-columns:1fr} .nav-links{display:none} }
+  </style>
+</head>
+
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <div class="logo" aria-hidden="true"></div>
+        <span>Agneetta’s Macarons</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="order.html">Order</a>
+        <a href="gallery.html">Gallery</a>
+      </nav>
+      <a class="btn primary" href="order.html">Order / Inquiry</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="card">
+      <h1>Order / Inquiry</h1>
+      <p>Dallas • Lead time: 48–72 hours • Custom events available</p>
+
+      <div class="hr"></div>
+
+      <h2 style="margin:0 0 8px; font-size:18px">How it works</h2>
+      <p>
+        1) Submit the form below<br/>
+        2) I’ll confirm availability + pricing<br/>
+        3) Payment secures your spot<br/>
+        4) Pickup/delivery window scheduled
+      </p>
+
+      <div class="hr"></div>
+
+      <h2 style="margin:0 0 8px; font-size:18px">Policies</h2>
+      <p>
+        • Typical lead time: 48–72 hours<br/>
+        • Storage: refrigerate airtight; best after 24 hours<br/>
+        • Allergen note: contains almonds + egg whites; fillings may contain dairy
+      </p>
+      <p class="small"><strong>Cancellation policy:</strong> full refund up to two days before pickup.</p>
+
+      <div class="hr"></div>
+
+      <h2 style="margin:0 0 8px; font-size:18px">Inquiry form</h2>
+      <p class="small">This opens your email app (no backend needed). Replace YOUR_EMAIL@EMAIL.COM with your email.</p>
+
+      <form id="inquiryForm" class="grid" style="margin-top:10px">
+        <div class="grid two">
+          <div>
+            <label for="name">Name</label>
+            <input id="name" name="name" placeholder="Jane Doe" required />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="jane@email.com" required />
+          </div>
+        </div>
+
+        <div class="grid two">
+          <div>
+            <label for="date">Desired date</label>
+            <input id="date" name="date" type="date" />
+          </div>
+          <div>
+            <label for="box">Box type</label>
+            <select id="box" name="box">
+              <option>Classic Assortment</option>
+              <option>Seasonal Drop</option>
+              <option>Custom Event Set</option>
+              <option>DIY Macaron Kit</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label for="details">Details</label>
+          <textarea id="details" name="details" placeholder="How many macarons? Flavor preferences? Theme colors? Pickup vs delivery? Allergies?"></textarea>
+        </div>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center">
+          <button class="btn primary" type="submit">Send inquiry</button>
+          <span id="formMsg" class="small" aria-live="polite"></span>
+        </div>
+
+        <p class="small">Email destination set in code: <strong style="color:var(--text)">YOUR_EMAIL@EMAIL.COM</strong></p>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById("inquiryForm");
+    const msg = document.getElementById("formMsg");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const date = document.getElementById("date").value;
+      const box = document.getElementById("box").value;
+      const details = document.getElementById("details").value.trim();
+
+      if (!name || !email) {
+        msg.textContent = "Please add your name and email.";
+        return;
+      }
+
+      const to = "YOUR_EMAIL@EMAIL.COM"; // <-- change this
+      const subject = encodeURIComponent(`Macaron Inquiry — ${name}`);
+
+      const bodyLines = [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        `Desired date: ${date || "N/A"}`,
+        `Box type: ${box}`,
+        "",
+        "Details:",
+        details || "(none provided)"
+      ];
+      const body = encodeURIComponent(bodyLines.join("\n"));
+
+      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+      msg.textContent = "Opening your email app…";
+    });
+  </script>
+</body>
+</html>
